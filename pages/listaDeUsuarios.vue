@@ -17,6 +17,13 @@
       <div v-else>
         <p>Nenhum usuário encontrado.</p>
       </div>
+  
+      <button
+        @click="deleteSelectedUsers"
+        :disabled="!selectedUsers.length"
+      >
+        Excluir
+      </button>
     </div>
   </template>
   
@@ -29,5 +36,11 @@
   onMounted(() => {
     users.value = JSON.parse(localStorage.getItem('users') || '[]');
   });
+  
+  const deleteSelectedUsers = () => {
+    users.value = users.value.filter(user => !selectedUsers.value.includes(user.id));
+    selectedUsers.value = [];
+    localStorage.setItem('users', JSON.stringify(users.value));
+  };
   </script>
   
