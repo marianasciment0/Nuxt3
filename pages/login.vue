@@ -54,19 +54,13 @@ const handleSubmit = async () => {
       }
     });
 
-    const data = await response.json();
     if (!response.ok) {
-      throw new Error('Usuário não encontrado ou erro desconhecido');
+      throw new Error('Erro ao tentar efetuar login. Tente novamente mais tarde.');
     }
-
-    alert('Credenciais verificadas');
-
-    console.log('Login Data:', data);
 
     router.push('/listaDeUsuarios');
   } catch (err) {
-    console.error('Erro na requisição:', err);
-    error.value = err.message;
+    error.value = 'Erro ao tentar efetuar login. Tente novamente mais tarde.';
   } finally {
     pending.value = false;
   }
