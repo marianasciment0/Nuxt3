@@ -1,24 +1,36 @@
 <template>
-  <div>
-    <h1>Login</h1>
-    <form @submit.prevent="handleSubmit">
-      <div>
+  <div class="d-flex justify-content-center align-items-center min-vh-100">
+    <form class="w-100 mw-50 p-4" @submit.prevent="handleSubmit">
+      <h1 class="h3 mb-3 fw-normal text-center">Iniciar sessão</h1>
+
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="name" placeholder="Digite seu nome" v-model="name">
         <label for="name">Nome:</label>
-        <input type="text" id="name" v-model="name" placeholder="Digite seu nome">
       </div>
-      <div>
+
+      <div class="form-floating mb-3">
+        <input type="email" class="form-control" id="email" placeholder="Digite seu email" v-model="email">
         <label for="email">Email:</label>
-        <input type="email" id="email" v-model="email" placeholder="Digite seu email">
       </div>
-      <div>
+
+      <div class="form-floating mb-3">
+        <input type="password" class="form-control" id="password" placeholder="Digite sua senha" v-model="password">
         <label for="password">Senha:</label>
-        <input type="password" id="password" v-model="password" placeholder="Digite sua senha">
       </div>
-      <button type="submit" :disabled="isButtonDisabled">Entrar</button>
+
+      <button class="btn btn-primary w-100 py-2" type="submit" :disabled="isButtonDisabled">Entrar</button>
+
+      <p v-if="error" class="text-danger mt-2">Erro: {{ error }}</p>
     </form>
-    <p v-if="error">Erro: {{ error }}</p>
   </div>
 </template>
+
+<style scoped>
+  .mw-50 {
+    max-width: 500px;
+  }
+</style>
+
 
 <script setup>
 import { ref, computed } from 'vue';

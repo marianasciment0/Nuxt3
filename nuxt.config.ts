@@ -1,12 +1,15 @@
 import { defineNuxtConfig } from 'nuxt/config';
 
 export default defineNuxtConfig({
-  compatibilityDate: '2024-04-03',
   devtools: { enabled: true },
+
   modules: [
     '@nuxtjs/tailwindcss'
   ],
+
   css: [
     'bootstrap/dist/css/bootstrap.min.css'
-  ]
+  ],
+
+  compatibilityDate: '2024-08-09',
 });
