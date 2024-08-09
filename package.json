@@ -14,7 +14,8 @@
     "bootstrap-vue-3": "^0.5.1",
     "bootstrap-vue-next": "^0.24.4",
     "nuxt": "^3.12.4",
-    "vue": "latest"
+    "vue": "latest",
+    "vue-paginate": "^3.6.0"
   },
   "devDependencies": {
     "@nuxtjs/tailwindcss": "^6.12.1"
