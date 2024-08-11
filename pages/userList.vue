@@ -2,58 +2,30 @@
   <div class="container mt-4">
     <h1>Painel de Usuários</h1>
 
-    <div v-if="currentPageUsers.length" class="list-group">
-      <label v-for="user in currentPageUsers" :key="user.id" class="list-group-item d-flex gap-2">
-        <input class="form-check-input flex-shrink-0" type="checkbox" v-model="selectedUsers" :value="user.id" />
-        <span>
-          {{ user.name }}
-        </span>
-      </label>
-    </div>
-    
-    <div v-else>
-      <p>Nenhum usuário encontrado.</p>
-    </div>
+    <UserList 
+      :users="currentPageUsers" 
+      v-model:selectedUsers="selectedUsers" 
+    />
 
-    <div class="d-flex gap-2 mt-3">
-      <button
-        @click="deleteSelectedUsers"
-        :disabled="!selectedUsers.length"
-        class="btn btn-danger"
-      >
-        Excluir
-      </button>
-      <nuxt-link to="/login">
-        <button class="btn btn-secondary">
-          Sair
-        </button>
-      </nuxt-link>
-    </div>
+    <ActionButtons 
+      :selectedUsers="selectedUsers" 
+      :deleteSelectedUsers="deleteSelectedUsers" 
+    />
 
-    <div v-if="totalPages > 1" class="pagination-controls mt-3 d-flex justify-content-center">
-      <button
-        @click="prevPage"
-        :disabled="currentPage === 1"
-        class="btn btn-primary me-2"
-      >
-        Anterior
-      </button>
-      <button
-        @click="nextPage"
-        :disabled="currentPage === totalPages"
-        class="btn btn-primary"
-      >
-        Próxima
-      </button>
-    </div>
-
-    <p class="page-info">Página Atual: {{ currentPage }}</p>
-    <p class="page-info">Total de Páginas: {{ totalPages }}</p>
+    <PaginationControls 
+      :currentPage="currentPage" 
+      :totalPages="totalPages" 
+      :nextPage="nextPage" 
+      :prevPage="prevPage" 
+    />
   </div>
 </template>
 
 <script setup>
 import { ref, onMounted, computed } from 'vue';
+import UserList from '~/components/userList.vue';
+import PaginationControls from '~/components/pagination.vue';
+import ActionButtons from '~/components/actionButton.vue';
 
 const loggedInUserName = ref(localStorage.getItem('username') || '');
 
@@ -114,20 +86,4 @@ const prevPage = () => {
 };
 </script>
 
-<style scoped>
-.pagination-controls {
-  margin-top: 1rem;
-  text-align: center;
-}
-
-.page-info {
-  font-size: 0.8rem;
-  color: #6c757d;
-  text-align: center;
-  margin-top: 1rem;
-}
-
-.d-flex .btn {
-  margin-right: 0.5rem;
-}
-</style>
+<style scoped src="../styles/userList.css"></style>

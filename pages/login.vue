@@ -3,38 +3,25 @@
     <form class="w-100 mw-50 p-4" @submit.prevent="handleSubmit">
       <h1 class="h3 mb-3 fw-normal text-center">Iniciar sessão</h1>
 
-      <div class="form-floating mb-3">
-        <input type="text" class="form-control" id="name" placeholder="Digite seu nome" v-model="name">
-        <label for="name">Nome:</label>
-      </div>
+      <FormInput id="name" type="text" label="Nome:" placeholder="Digite seu nome" v-model="name" />
 
-      <div class="form-floating mb-3">
-        <input type="email" class="form-control" id="email" placeholder="Digite seu email" v-model="email">
-        <label for="email">Email:</label>
-      </div>
+      <FormInput id="email" type="email" label="Email:" placeholder="Digite seu email" v-model="email" />
 
-      <div class="form-floating mb-3">
-        <input type="password" class="form-control" id="password" placeholder="Digite sua senha" v-model="password">
-        <label for="password">Senha:</label>
-      </div>
+      <FormInput id="password" type="password" label="Senha:" placeholder="Digite sua senha" v-model="password" />
 
-      <button class="btn btn-primary w-100 py-2" type="submit" :disabled="isButtonDisabled">Entrar</button>
+      <SubmitButton :disabled="isButtonDisabled" />
 
-      <p v-if="error" class="text-danger mt-2">Erro: {{ error }}</p>
+      <ErrorMessage :message="error" />
     </form>
   </div>
 </template>
 
-<style scoped>
-  .mw-50 {
-    max-width: 500px;
-  }
-</style>
-
-
 <script setup>
 import { ref, computed } from 'vue';
 import { useRouter } from 'vue-router';
+import FormInput from '~/components/form.vue';
+import SubmitButton from '~/components/submitButton.vue';
+import ErrorMessage from '~/components/ErrorMessage.vue';
 
 const router = useRouter();
 
@@ -76,7 +63,7 @@ const handleSubmit = async () => {
     users.push({ id: Date.now(), name: name.value });
     localStorage.setItem('users', JSON.stringify(users));
     
-    router.push('/listaDeUsuarios');
+    router.push('/userList');
   } catch (err) {
     error.value = 'Erro ao tentar efetuar login. Tente novamente mais tarde.';
   } finally {
@@ -84,3 +71,9 @@ const handleSubmit = async () => {
   }
 };
 </script>
+
+<style scoped>
+  .mw-50 {
+    max-width: 500px;
+  }
+</style>

@@ -1,0 +1,16 @@
+.pagination-controls {
+    margin-top: 1rem;
+    text-align: center;
+  }
+  
+  .page-info {
+    font-size: 0.8rem;
+    color: #6c757d;
+    text-align: center;
+    margin-top: 1rem;
+  }
+  
+  .d-flex .btn {
+    margin-right: 0.5rem;
+  }
+  
